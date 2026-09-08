@@ -62,15 +62,32 @@ loss statistic) or Tier 1 (vague industry-outlook language).
    delete-the-trigger test normally instead. *(Revised after the pilot run's relevance recall came back
    at 0.20 on false positives — the original unconditional version of this rule was catching cases where
    the stakeholder language was incidental, not the sentence's point.)*
-4. **Mixed-clause sentences** (e.g., contextual disaster mention + corporate metric in one sentence, like
-   the ESR ~200% example): code by the sentence's dominant/main clause, not the subordinate one.
-5. **Proper-noun collisions**: Tier 0 regardless of surrounding content, unless real ESG content
-   independently survives the delete-test. The presence of an unrelated quantified figure elsewhere in
-   the sentence does **not** rescue a proper-noun collision from Tier 0 — the number must itself quantify
-   a genuine ESG claim, not just any business metric (e.g., fundraising totals, revenue figures) that
-   happens to share the sentence. *(Revised for the same reason as Rule 3 — the $4.2 billion fundraising
-   figure in the Power Sustainable example was pulling that sentence toward Tier 3 despite being an
-   unrelated business metric.)*
+4. **Mixed-clause sentences**: this rule governs which tag (Corporate vs. Contextual) to assign when both
+   a corporate clause and a contextual clause are present, not whether ESG content exists at all — code
+   the Corporate/Contextual tag by the sentence's dominant/main clause, not a subordinate one (e.g., a
+   contextual disaster mention attached to a corporate metric, like the ESR ~200% example — tag by the
+   metric's actor). **If the sentence's dominant clause is NOT itself an ESG claim** (e.g., a plain
+   financial-performance statement) **and the only ESG-relevant content is in a subordinate clause** (e.g.,
+   a named or quantified catastrophe mention), that subordinate content should still be scored normally
+   as Contextual — do not default to Tier 0 just because the grammatically dominant clause is non-ESG. A
+   quantified contextual figure (e.g., a named catastrophe's dollar loss) is still Tier 3 even when it
+   sits in a subordinate clause of an otherwise non-ESG sentence. *(Revised after the pilot run — three
+   sentences like "we posted a good profit despite Typhoon Jebi" and one quantified case ("$175 million
+   related to estimated hurricane claims") were being zeroed to Tier 0 because the profit/earnings clause
+   was treated as erasing the genuine catastrophe content in the subordinate clause, contradicting the
+   axis-independence principle in Section 1.1 that a Contextual sentence can be Tier 3.)*
+5. **Proper-noun collisions**: applies **only** to literal proper-noun collisions — an ESG word embedded
+   in a company/subsidiary/product name (e.g., "Power Sustainable" as a division name). It does **not**
+   apply to generic reputation claims, values statements, or vague self-praise — those should go through
+   the normal delete-the-trigger and specificity-tier logic instead, not get defaulted to Tier 0 via this
+   rule. Where a genuine proper-noun collision is present: Tier 0 regardless of surrounding content,
+   unless real ESG content independently survives the delete-test elsewhere in the sentence. The presence
+   of an unrelated quantified figure elsewhere in the sentence does **not** rescue a proper-noun collision
+   from Tier 0 — the number must itself quantify a genuine ESG claim, not just any business metric (e.g.,
+   fundraising totals, revenue figures) that happens to share the sentence. *(Revised twice now — first
+   for the Power Sustainable $4.2B fundraising figure, then to stop the rule being invoked as a generic
+   "vague content" excuse on sentences with no actual proper-noun collision, e.g. a garbled corporate-
+   citizenship sentence and an "international ESG ratings" reputation claim.)*
 6. **Named business lines** count as Tier 2 even without a formal "initiative" or "alliance" label — e.g.
    a sentence naming specific underwriting or investment activity (carbon capture, hydrogen, EV charging,
    renewable energy infrastructure) is Tier 2 even with no explicit program name, because the activity
