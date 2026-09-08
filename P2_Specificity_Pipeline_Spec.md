@@ -71,11 +71,20 @@ loss statistic) or Tier 1 (vague industry-outlook language).
    a named or quantified catastrophe mention), that subordinate content should still be scored normally
    as Contextual — do not default to Tier 0 just because the grammatically dominant clause is non-ESG. A
    quantified contextual figure (e.g., a named catastrophe's dollar loss) is still Tier 3 even when it
-   sits in a subordinate clause of an otherwise non-ESG sentence. *(Revised after the pilot run — three
-   sentences like "we posted a good profit despite Typhoon Jebi" and one quantified case ("$175 million
-   related to estimated hurricane claims") were being zeroed to Tier 0 because the profit/earnings clause
-   was treated as erasing the genuine catastrophe content in the subordinate clause, contradicting the
-   axis-independence principle in Section 1.1 that a Contextual sentence can be Tier 3.)*
+   sits in a subordinate clause of an otherwise non-ESG sentence. This applies even when the contextual
+   ESG content is unnamed/generic (e.g., "several natural disasters" with no event name) or appears
+   alongside other unrelated subordinate clauses in a list — the presence of **any** genuine contextual
+   ESG content, however minor or generic relative to the dominant clause, means the sentence should be
+   tagged Contextual with the appropriate (likely low) specificity tier, not defaulted to Tier 0. *(Revised
+   twice now. First pass after the pilot run — three sentences like "we posted a good profit despite
+   Typhoon Jebi" and one quantified case ("$175 million related to estimated hurricane claims") were being
+   zeroed to Tier 0 because the profit/earnings clause was treated as erasing the genuine catastrophe
+   content in the subordinate clause, contradicting the axis-independence principle in Section 1.1 that a
+   Contextual sentence can be Tier 3. Second pass — a spot-check found the first-pass fix only reliably
+   triggered when the contextual content was strong/specific (a named storm alone, a dollar figure); two
+   sentences with weaker signal — "several massive natural disasters" (no event name) and "Storm Sandy"
+   buried in a list alongside two unrelated non-ESG clauses — were still defaulting to Tier 0, so the rule
+   now explicitly covers generic/unnamed and crowded-out contextual content too.)*
 5. **Proper-noun collisions**: applies **only** to literal proper-noun collisions — an ESG word embedded
    in a company/subsidiary/product name (e.g., "Power Sustainable" as a division name). It does **not**
    apply to generic reputation claims, values statements, or vague self-praise — those should go through
