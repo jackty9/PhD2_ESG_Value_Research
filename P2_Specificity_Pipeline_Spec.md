@@ -58,13 +58,22 @@ loss statistic) or Tier 1 (vague industry-outlook language).
    beneficiary, even with no specific issue attached, default to **Tier 1 genuine** (not Tier 0), provided
    the framing is clearly intentional rather than a word collision. This resolves a documented disagreement
    in manual coding (κ moved from 0.645 to a tighter range once this rule was applied consistently).
-4. **Present-perfect temporal ambiguity** (if temporal is ever revisited): not in scope for this round —
-   temporal orientation was the least reliable axis in manual coding and is deliberately excluded here.
-5. **Mixed-clause sentences** (e.g., contextual disaster mention + corporate metric in one sentence, like
+4. **Mixed-clause sentences** (e.g., contextual disaster mention + corporate metric in one sentence, like
    the ESR ~200% example): code by the sentence's dominant/main clause, not the subordinate one.
-6. **Proper-noun collisions**: check for ESG words embedded in company/subsidiary names (e.g., "Power
+5. **Proper-noun collisions**: check for ESG words embedded in company/subsidiary names (e.g., "Power
    Sustainable" as a division name) — these are Tier 0 regardless of surrounding content, unless real ESG
    content independently survives the delete-test elsewhere in the sentence.
+6. **Named business lines** count as Tier 2 even without a formal "initiative" or "alliance" label — e.g.
+   a sentence naming specific underwriting or investment activity (carbon capture, hydrogen, EV charging,
+   renewable energy infrastructure) is Tier 2 even with no explicit program name, because the activity
+   itself is specific and checkable. This came out of manually reviewing the tier ground truth — the
+   original named-pattern rules only caught formally-branded programs and missed named-but-unbranded
+   business activity.
+
+**Note on the excluded temporal-ambiguity rule**: an earlier draft of this list included a placeholder
+rule 4, "Present-perfect temporal ambiguity — not in scope for this round." It has been removed rather
+than renumbered around, since it was never applied (temporal orientation is out of scope for this round)
+and its presence only offset the numbering of the rules that are actually in use.
 
 ### 1.3 Few-shot examples for the classification prompt
 
