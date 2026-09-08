@@ -55,14 +55,22 @@ loss statistic) or Tier 1 (vague industry-outlook language).
    intended, or is it a word colliding with a non-ESG meaning (e.g., "sustainable pricing" = underwriting
    cycle; "sustainability" defined in-sentence as shareholder value; "Renewal Agenda" ≠ renewable energy)?
 3. **Generic stakeholder-inclusion rule**: sentences naming "society"/"stakeholders" as an intended
-   beneficiary, even with no specific issue attached, default to **Tier 1 genuine** (not Tier 0), provided
-   the framing is clearly intentional rather than a word collision. This resolves a documented disagreement
-   in manual coding (κ moved from 0.645 to a tighter range once this rule was applied consistently).
+   beneficiary default to **Tier 1 genuine** (not Tier 0) **only when that beneficiary language is the
+   sentence's main clause or point** (e.g., "we will contribute to realizing a safe and secure society").
+   When it's appended to an unrelated business claim (e.g., a competitive-differentiation statement that
+   happens to end in "creating value for all stakeholders"), it does not earn the default — apply the
+   delete-the-trigger test normally instead. *(Revised after the pilot run's relevance recall came back
+   at 0.20 on false positives — the original unconditional version of this rule was catching cases where
+   the stakeholder language was incidental, not the sentence's point.)*
 4. **Mixed-clause sentences** (e.g., contextual disaster mention + corporate metric in one sentence, like
    the ESR ~200% example): code by the sentence's dominant/main clause, not the subordinate one.
-5. **Proper-noun collisions**: check for ESG words embedded in company/subsidiary names (e.g., "Power
-   Sustainable" as a division name) — these are Tier 0 regardless of surrounding content, unless real ESG
-   content independently survives the delete-test elsewhere in the sentence.
+5. **Proper-noun collisions**: Tier 0 regardless of surrounding content, unless real ESG content
+   independently survives the delete-test. The presence of an unrelated quantified figure elsewhere in
+   the sentence does **not** rescue a proper-noun collision from Tier 0 — the number must itself quantify
+   a genuine ESG claim, not just any business metric (e.g., fundraising totals, revenue figures) that
+   happens to share the sentence. *(Revised for the same reason as Rule 3 — the $4.2 billion fundraising
+   figure in the Power Sustainable example was pulling that sentence toward Tier 3 despite being an
+   unrelated business metric.)*
 6. **Named business lines** count as Tier 2 even without a formal "initiative" or "alliance" label — e.g.
    a sentence naming specific underwriting or investment activity (carbon capture, hydrogen, EV charging,
    renewable energy infrastructure) is Tier 2 even with no explicit program name, because the activity
@@ -89,7 +97,37 @@ Use these as few-shot examples — they are manually validated (κ = 0.645 on re
 - *"As we implement our Renewal Agenda 2.0, we will move up a gear."* → FP: likely lexical near-miss on
   "renewable"; no environmental content.
 - *"Both Sagard and Power Sustainable launched new investment vehicles and accelerated external funding,
-  raising a total of $4.2 billion."* → FP: "Sustainable" is part of a subsidiary's proper name.
+  raising a total of $4.2 billion."* → FP: "Sustainable" is part of a subsidiary's proper name; the
+  fundraising total is an unrelated business metric that does not rescue it (Rule 5).
+- *"We will speed up the integration of service platforms, and shape the Company's operation and services
+  to be more integrated, intelligent and ecological."* → FP: "ecological" means service-ecosystem
+  integration here, not environment — no ESG content survives the delete-test.
+- *"Imerys, a producer of mineral-based specialties for industry; Lafarge, which produces cement,
+  aggregates and concrete; Total, in the oil, gas and alternative energy industry; SGS, engaged in
+  testing, inspection and certification; Pernod Ricard, a leader in wines and spirits; and GDF Suez, a
+  provider of electricity, natural gas, and energy and environmental services."* → FP: a portfolio-
+  company/entity list; industry descriptors trigger the flag, not genuine ESG content.
+- *"Depressed commodity prices China's slowing growth continues to impact all natural resource- and
+  export-dependent countries around the world, particularly throughout Asia and Latin America."* → FP:
+  macro/commodity commentary; "natural resource" is a sector term here, not environmental content.
+- *"U.S. growth is on a more solid footing and more broad-based — construction, manufacturing
+  (particularly auto), energy and housing — and there is less impact from recent government fiscal
+  contraction."* → FP: macro-economic commentary listing sectors; "energy" is a sector category, not
+  environmental content.
+- *"To respond promptly to environmental flux, we ourselves have to become a resilient and sustainable
+  group."* → FP: "environmental flux" means changing business conditions, not ecology; both trigger words
+  carry the entire ESG signal with nothing surviving the delete-test.
+- *"Jay S. Fishman Chairman and Chief Executive Officer INDUSTRY UNDERWRITING ENVIRONMENT — IMPACT OF
+  CATASTROPHES Metric 2012 2011 2010 2009 2008 Earned Premiums $22,357 $22,090 $21,432 $21,418 $21,579
+  Total Revenues $25,740 $25,446 $25,112 $24,680 $24,477 ... Return On Equity 9.8% 5.7% 12.1% 13.5% 11.4%
+  ... HISTORICAL MILESTONES AND COMPANY HERITAGE: 1853:"* → FP: a financial-results table under a header
+  using "ENVIRONMENT" in its business sense; dense numeric content does not make it ESG disclosure — treat
+  tables/headers like this as Tier 0 regardless of number density.
+
+*(The six examples above were added after the first pilot run's relevance recall came back at 0.20 on
+false positives; they cover patterns the original four-example set did not — see the classification
+prompt in `PHDp2_CEOLetters_AnnualReports_TextAnalysis.ipynb` Section 6.10.2 for the same set with the
+model's own short_reason field alongside.)*
 
 **Tier 1 — Vague / boilerplate (Corporate)**
 - *"...enhanced social well-being in serving the overall national development plan... advanced steady
