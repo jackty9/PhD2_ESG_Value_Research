@@ -1,0 +1,259 @@
+{
+  "event_rows": 84,
+  "specificity_sentiment_firmyears": 238,
+  "matched": 65,
+  "missing_specificity_years": [
+    {
+      "Company": "Chubb",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2018
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2019
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2020
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2021
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2022
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2023
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2020
+    }
+  ],
+  "missing_overall_sentiment_years": [
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2018
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2019
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2020
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2021
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2022
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2023
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2020
+    }
+  ],
+  "missing_ESG_sentiment_years": [
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2018
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2019
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2020
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2021
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2022
+    },
+    {
+      "Company": "MetLife, Inc.",
+      "Fiscal Year": 2023
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "Prudential Financial, Inc.",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2012
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2013
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2014
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2015
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2016
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2017
+    },
+    {
+      "Company": "The Progressive Corporation",
+      "Fiscal Year": 2020
+    }
+  ],
+  "duplicate_event_keys": 0,
+  "duplicate_narrative_keys": 0,
+  "regression_N": 62,
+  "firms": 7
+}

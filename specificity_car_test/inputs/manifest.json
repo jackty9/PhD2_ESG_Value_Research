@@ -1,0 +1,51 @@
+{
+  "event_branch_commit": "6693c1d60844c31c76dc6a129cb40863dc50b05c",
+  "specificity_branch_commit": "2428ae52895ffba97d280f5d776c9e88b376bfc9",
+  "drive_file_id": "1ztptBqL5cdJwob_OuMzjEZduNTtX7ocY",
+  "files": {
+    "ceo_letter_event_study_panel_US.csv": {
+      "sha256": "835067548e0fe5a3b9133eded87a14ca6066ea37c051dfa75d91347c2ce8ff97",
+      "source": "MyDrive/phd/Data/ceo_letter_event_study_panel_US.csv"
+    },
+    "df_ar_cluster.csv": {
+      "sha256": "68f150d8bce60b9fb6f1439715a129032efe61529ec6ef678a4d1b468d19be50",
+      "source": "MyDrive/phd/Data/df_ar_cluster.csv"
+    },
+    "panel_reg_export.csv": {
+      "sha256": "9639b9f32b5b71236688e675d073fdec45b4489b115cfb903965442637cae51a",
+      "source": "specificity-pipeline-3d-regression:null_check/data/panel_reg_export.csv"
+    },
+    "raw_prices/AIG.csv": {
+      "sha256": "80cd3349be159e1ee15ba6ff6f84908bbc3352c2f3b71b285dabfeac3a6c3ab9",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/AIG.csv"
+    },
+    "raw_prices/ALL.csv": {
+      "sha256": "c947cc5b979f0495035116be870b33470a7f9d4df43fc97900b30ee234f4abe0",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/ALL.csv"
+    },
+    "raw_prices/CB.csv": {
+      "sha256": "8e301ac2d0f9711936c17bb3fcadad8720941598f272389063d8304134af20b8",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/CB.csv"
+    },
+    "raw_prices/MET.csv": {
+      "sha256": "d5eefd2d0414b4ffcc30219e42856c027eb97d48fa6f2a32d1d19b1234c8a81b",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/MET.csv"
+    },
+    "raw_prices/PGR.csv": {
+      "sha256": "9e9856b7f664886ff886f6a322ba9aa723839512c32b5bd6e25d2f3b40f25425",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/PGR.csv"
+    },
+    "raw_prices/PRU.csv": {
+      "sha256": "e533b7b69e8fa0214111137dc2e13cb8b09f61ecebc5e48235397fedc4734576",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/PRU.csv"
+    },
+    "raw_prices/TRV.csv": {
+      "sha256": "146e3201882cefb501101ad18370dfc14d80adee1abc81fad1426076b558f17d",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/TRV.csv"
+    },
+    "raw_prices/URTH.csv": {
+      "sha256": "921a98e69214bc81bcc3bc577e5f5326ea62ba20f39307e64dccbb299e739e1b",
+      "source": "MyDrive/phd/Data/event_study_raw_prices/URTH.csv"
+    }
+  }
+}

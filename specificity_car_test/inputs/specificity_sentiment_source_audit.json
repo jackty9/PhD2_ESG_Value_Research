@@ -1,0 +1,21 @@
+{
+  "specificity_sentence_rows": 5544,
+  "finbert_sentence_rows": 22806,
+  "specificity_exact_duplicate_rows": 62,
+  "finbert_exact_duplicate_rows": 125,
+  "specificity_firmyears": 236,
+  "sentiment_firmyears": 238,
+  "firmyear_merge_counts": {
+    "both": 236,
+    "left_only": 2,
+    "right_only": 0
+  },
+  "source_sha256": {
+    "df_ar_ceo_sentences_esg_combined_specificity.csv": "6da5cd39aaf22a5c9425e4124b93667ada318f7689c0d41210a456ca66777109",
+    "df_ar_ceo_sentences_finbert_senti.csv": "0b3030763e220e7b33d1cc96d140c9490bac21b8bce252d88f14dc04dd291a65"
+  },
+  "sentiment_definition": "share(sent_label==positive) - share(sent_label==negative)",
+  "ESG_sentiment_population": "any_esg_flag == 1",
+  "primary_specificity_definition": "mean tier among Corporate sentences with tier >= 1",
+  "robustness_specificity_definition": "mean tier 0-3 over all classified ESG-flagged sentences"
+}

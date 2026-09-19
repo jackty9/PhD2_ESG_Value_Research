@@ -1,0 +1,15 @@
+{
+  "event_input_rows": 84,
+  "specificity_input_rows": 238,
+  "narrative_input_rows": 238,
+  "matched": 65,
+  "event_only": 19,
+  "specificity_only_outside_scope": 173,
+  "duplicates": 0,
+  "undefined_specificity_in_matched": 3,
+  "pooled_N": 62,
+  "specificity_mean": 1.4395261366872034,
+  "specificity_sd_ddof1": 0.22955588313622707,
+  "specificity_definition": "Mean tier among Corporate ESG sentences with tier >= 1; E and S/G combined. No lag.",
+  "branch_drive_specificity_match": true
+}

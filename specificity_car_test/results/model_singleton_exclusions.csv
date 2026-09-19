@@ -1,0 +1,13 @@
+Company,Fiscal Year,outcome,specification,scenario,reason
+"MetLife, Inc.",2012,"CAR[-1,+1]",firm_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[-1,+1]",firm_year_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"|CAR|[-1,+1]",firm_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"|CAR|[-1,+1]",firm_year_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[-2,+2]",firm_year_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[0,+1]",firm_year_FE,main,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[-1,+1]",firm_year_FE,exclude_most_influential,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[-1,+1]",firm_year_FE,exclude_March_April_2020,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"CAR[-1,+1]",firm_year_FE,existing_text_controls,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"|CAR|[-1,+1]",firm_year_FE,exclude_most_influential,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"|CAR|[-1,+1]",firm_year_FE,exclude_March_April_2020,Singleton fixed-effect group; no within-group slope information
+"MetLife, Inc.",2012,"|CAR|[-1,+1]",firm_year_FE,existing_text_controls,Singleton fixed-effect group; no within-group slope information
