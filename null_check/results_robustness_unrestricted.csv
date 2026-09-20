@@ -1,0 +1,11 @@
+model,term,variant,coef,se,p,n
+Model 2,Corporate_ESG_share_lag,"baseline (Corporate-only, Verified)",0.03098968511430382,0.032482752970283864,0.34006589677302335,183
+Model 2,Corporate_ESG_share_lag,unrestricted (Corporate+Contextual),0.03098968511430382,0.032482752970283864,0.34006589677302335,183
+Model 3,Corporate_ESG_share_lag,"baseline (Corporate-only, Verified)",0.0679675162323935,0.04759889744321217,0.15331429000734423,183
+Model 3,Corporate_ESG_share_lag,unrestricted (Corporate+Contextual),0.06644257588436325,0.048725562385381185,0.17269091338519427,183
+Model 3,Verified_ESG_share_lag,"baseline (Corporate-only, Verified)",-0.07462303772035617,0.06255367055881227,0.23289123197721295,183
+Model 3,Verified_ESG_share_lag,unrestricted (Corporate+Contextual),-0.07243208146876245,0.06446211738850462,0.2611666494729229,183
+Model 4,Corporate_ESG_share_lag,"baseline (Corporate-only, Verified)",0.030500648358795596,0.032550484848153954,0.34874521963122007,183
+Model 4,Corporate_ESG_share_lag,unrestricted (Corporate+Contextual),0.030259961944513053,0.03281497843319286,0.35645622663256815,183
+Model 4,Specificity_mean_lag,"baseline (Corporate-only, Verified)",0.0008453448174723377,0.0059649678651646975,0.8873025576578277,183
+Model 4,Specificity_mean_lag,unrestricted (Corporate+Contextual),0.0010905679158029133,0.007536975425134545,0.8849511363456681,183
