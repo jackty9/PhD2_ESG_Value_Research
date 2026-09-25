@@ -7,8 +7,17 @@ vocabulary without distinguishing a negative event from a negative outcome
 being successfully mitigated -- see this project's spot-check audit: 4 of
 10 random tier>=2/negative sentences were clear mislabels).
 
-**Status: prompt and pipeline are built; classification has not been run.**
-This requires an authenticated OpenAI client in Colab (no API access in
+**Status: Revision 2 (4-case schema).** Revision 1 (3-case) was run and produced
+`df_ar_ceo_sentences_polarity_reclass.csv` (200 batch requests, 3,994/3,994 classified). A
+spot-check of 15 random `mitigated_negative` sentences found 14 of 15 were plain positive
+statements with no negative/reduction vocabulary -- Case 2 had become a generic positive
+catch-all. Case 4 (`plain_positive`) was added to fix this; the notebook's Section 6.13 now uses
+task name `polarity_reclass_tier1plus_v2` and exports to
+`df_ar_ceo_sentences_polarity_reclass_v2.csv`, keeping Revision 1's output on Drive untouched for
+the audit trail. Re-run pending. Coverage numbers/firm-year CSV are NOT to be trusted until a
+fresh spot-check of the v2 `mitigated_negative` bucket AND Cohen's kappa vs. manual annotation
+both pass.
+Re-running requires an authenticated OpenAI client in Colab (no API access in
 this sandbox) and genuine human manual annotation for validation (cannot be
 fabricated). Steps 1 (population count) and the validation-sample selection
 have been run for real; everything downstream of the actual GPT
