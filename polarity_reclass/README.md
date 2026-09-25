@@ -7,16 +7,25 @@ vocabulary without distinguishing a negative event from a negative outcome
 being successfully mitigated -- see this project's spot-check audit: 4 of
 10 random tier>=2/negative sentences were clear mislabels).
 
-**Status: Revision 2 (4-case schema).** Revision 1 (3-case) was run and produced
-`df_ar_ceo_sentences_polarity_reclass.csv` (200 batch requests, 3,994/3,994 classified). A
-spot-check of 15 random `mitigated_negative` sentences found 14 of 15 were plain positive
-statements with no negative/reduction vocabulary -- Case 2 had become a generic positive
-catch-all. Case 4 (`plain_positive`) was added to fix this; the notebook's Section 6.13 now uses
-task name `polarity_reclass_tier1plus_v2` and exports to
-`df_ar_ceo_sentences_polarity_reclass_v2.csv`, keeping Revision 1's output on Drive untouched for
-the audit trail. Re-run pending. Coverage numbers/firm-year CSV are NOT to be trusted until a
-fresh spot-check of the v2 `mitigated_negative` bucket AND Cohen's kappa vs. manual annotation
-both pass.
+**Status: Revision 3 (4-case schema, tightened Case 2 qualifying-word whitelist).**
+Revision 1 (3-case) was run and produced `df_ar_ceo_sentences_polarity_reclass.csv`
+(200 batch requests, 3,994/3,994 classified). A spot-check of 15 random `mitigated_negative`
+sentences found 14 of 15 were plain positive statements with no negative/reduction vocabulary --
+Case 2 had become a generic positive catch-all. Case 4 (`plain_positive`) was added in Revision 2
+to fix this and re-run, producing `df_ar_ceo_sentences_polarity_reclass_v2.csv`. A fresh
+15-sentence spot-check of the corrected `mitigated_negative` bucket was then disputed: independent
+review found 4 of 15 still misclassified, in two patterns -- (1) vague progress/care language
+("gained ground," "moved up," "progress," "paying attention to") accepted as reduction vocabulary
+with no specific negative quantity actually named, and (2) admitted-gap/deferred-commitment
+sentences (a measurement method still under development, an unaddressed gap) misclassified as
+positive mitigations. Revision 3 adds an explicit whitelist of qualifying negative/reduction
+words/phrases for Case 2, an explicit non-qualifying list of vague-progress words that must not
+justify it, and a rule routing admitted-gap/deferred-commitment sentences to Case 3
+(`ambiguous_scale`). The notebook's Section 6.13 now uses task name
+`polarity_reclass_tier1plus_v3` and exports to `df_ar_ceo_sentences_polarity_reclass_v3.csv`,
+keeping Revisions 1 and 2's output on Drive untouched for the audit trail. Re-run pending.
+Coverage numbers/firm-year CSV are NOT to be trusted until a fresh spot-check of the v3
+`mitigated_negative` bucket AND Cohen's kappa vs. manual annotation both pass.
 Re-running requires an authenticated OpenAI client in Colab (no API access in
 this sandbox) and genuine human manual annotation for validation (cannot be
 fabricated). Steps 1 (population count) and the validation-sample selection
@@ -37,10 +46,21 @@ negative = 67.
 ## Contents
 
 - `00_prompt_design.py` -- the locked `POLARITY_SYSTEM_PROMPT` and JSON
-  schema. Three-case taxonomy (`negative_event` / `mitigated_negative` /
-  `ambiguous_scale`), with the three exact sentences from this project's
-  own spot-check audit as few-shot anchors (Chubb 2018 GHG-reduction,
-  Progressive 2022 engagement-index, Travelers 2012 catastrophe-loss).
+  schema. Four-case taxonomy (`negative_event` / `mitigated_negative` /
+  `ambiguous_scale` / `plain_positive`), Revision 3: Case 2 now requires an
+  explicit qualifying negative/reduction word or phrase from a whitelist
+  (reduce, cut, limit, avoid, decline, protect-against-harm, etc.), with a
+  matching non-qualifying list (progress, gained ground, moved up, momentum,
+  etc.) that must not be used to justify it, and admitted-gap/deferred-
+  commitment sentences now route to Case 3. Few-shot anchors: the three
+  Revision 1 sentences (Chubb 2018 GHG-reduction, Progressive 2022
+  engagement-index, Travelers 2012 catastrophe-loss), the Revision 2 Case 4
+  anchor (Prudential 2018 capital-deployment), two new valid Case 2 anchors
+  (Allianz 2013 "despite considerable losses," Prudential 2020 "protect
+  their health and safety"), two counter-example anchors (Progressive 2021
+  "gained ground," Allianz 2016 "moved up" -- both plain_positive, not
+  mitigated_negative), and one new ambiguous_scale anchor (Allstate 2023
+  Scope 3 measurement-not-yet-developed sentence).
   Run standalone to print prompt length and schema enums (no API call).
 - `01_classify_batch.py` -- Batch API submission script, mirroring
   Section 6.11/6.12's exact pattern (write JSONL, submit, poll, download,
