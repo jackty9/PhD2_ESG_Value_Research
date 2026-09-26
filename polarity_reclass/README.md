@@ -136,6 +136,21 @@ negative = 67.
   4. New coverage check (firm-years with >=1 qualifying sentence, same
      format as the original audit), to confirm or rule out whether
      `Negative_Specific_share`'s sparsity persists.
+- `04_regression.py` -- **run for real** on the Revision 6 full-population
+  classification (`data/df_ar_ceo_sentences_polarity_reclass_v6.csv`). Builds
+  `Positive_Specific_share`/`Negative_Specific_share` (tier>=2, `total_sent`
+  denominator from `esg_e_sg/data/panel_reg_export.csv`), merges into the
+  same panel `esg_e_sg/common.py`'s `load_and_reconstruct()` builds, lags
+  both shares, and fits Q and ROE with the same controls/FE/HC3 spec as
+  `esg_e_sg/02_regression.py` (`CTRL_5A_FORMULA`, `build_model_sample`),
+  reporting each share jointly and alone. Results: neither
+  `Positive_Specific_share_lag` nor `Negative_Specific_share_lag` is
+  statistically significant for either Q or ROE, alone or jointly (all
+  p>0.17, N=183, MetLife and Progressive dropped for insufficient
+  observations). `Negative_Specific_share_lag` has only 12 non-zero
+  firm-years within this N=183 sample (of 17 non-zero across all 238) --
+  any interpretation of its coefficient should account for that sparsity.
+  Saves `results_specific_share.csv`.
 
 ## Run order
 
