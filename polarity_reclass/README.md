@@ -7,50 +7,52 @@ vocabulary without distinguishing a negative event from a negative outcome
 being successfully mitigated -- see this project's spot-check audit: 4 of
 10 random tier>=2/negative sentences were clear mislabels).
 
-**Status: Revision 5 (4-case schema, Case 2 harm-scope fix + 4 ambiguous_scale patterns).**
-Revision 1 (3-case) was run and produced `df_ar_ceo_sentences_polarity_reclass.csv` (200 batch
-requests, 3,994/3,994 classified). A spot-check of 15 random `mitigated_negative` sentences found
-14 of 15 were plain positive statements with no negative/reduction vocabulary -- Case 2 had become
-a generic positive catch-all. Case 4 (`plain_positive`) was added in Revision 2 to fix this and
-re-run, producing `df_ar_ceo_sentences_polarity_reclass_v2.csv`. The REAL validation metric was
-then run for the first time: Cohen's kappa against 100 manually-coded sentences came back at
-**0.7368**, below the 0.80 target. A Revision 3 attempt tightened Case 2's qualifying vocabulary
-based on a disputed spot-check claim, but the real kappa confusion matrix showed Case 2 was
-already strong (90.5% recall on mitigated_negative, 92.9% on plain_positive) -- Revision 3 was
-solving the wrong problem and was **reverted**. The actual bottleneck was Case 3
-(`ambiguous_scale`): only 17.6% recall (3 of 17) against manual coding. Revision 4 added three new
-Case 3 anchors and re-ran the validation-only pilot (6.13.2b): kappa improved to **0.7667**
-(4-case) / 0.7517 (3-way polarity), and ambiguous_scale recall nearly tripled to 47.1% -- still
-below target. Reading all 17 disagreement sentences from that pilot found five distinct root
-causes: (1) the new pattern (c) [bare scale/fact] over-triggered onto performance metrics and
-established practices that ARE the achievement (a 95.6% survey favorability score, an annual
-pay-equity review); (2) a real structural gap in Case 2 -- qualifying reduction words fired
-regardless of what was being reduced, wrongly pulling job cuts, a leadership-team headcount trim,
-and a narrowed charitable-program scope into `mitigated_negative`; (3) pattern (a)
-[rhetorical/no-outcome] was too narrow, missing conditionals ("if X, then Y") and generic
-statements of business principle; (4) a new pattern (d) was needed for personal/emotional
-reflection with no company action described; (5) a narrow, real piece of the reverted Revision 3
--- "despite adversity, delivered a good outcome" -- was reinstated with a single anchor, since the
-real manual annotation confirmed this specific pattern does matter (distinct from Revision 3's
-broader, unnecessary whitelist changes). Revision 5 fixes all five with real corpus sentences as
-anchors. A sixth issue -- inconsistent over/under-triggering of the vague forward-commitment
-pattern (b) -- is treated as residual noise for now, not chased further. The notebook's Section
-6.13 now uses task name `polarity_reclass_tier1plus_v5` and exports to
-`df_ar_ceo_sentences_polarity_reclass_v5.csv`, keeping Revisions 1, 2, and 4's output on Drive
+**Status: Revision 6 (4-case schema, pattern (d) + despite-adversity bug fixes, manual-coding
+correction applied).** Revision 1 (3-case) was run and produced
+`df_ar_ceo_sentences_polarity_reclass.csv` (200 batch requests, 3,994/3,994 classified). A
+spot-check of 15 random `mitigated_negative` sentences found 14 of 15 were plain positive
+statements with no negative/reduction vocabulary -- Case 2 had become a generic positive catch-all.
+Case 4 (`plain_positive`) was added in Revision 2 to fix this and re-run, producing
+`df_ar_ceo_sentences_polarity_reclass_v2.csv`. The REAL validation metric was then run for the
+first time: Cohen's kappa against 100 manually-coded sentences came back at **0.7368**, below the
+0.80 target. A Revision 3 attempt tightened Case 2's qualifying vocabulary based on a disputed
+spot-check claim, but the real kappa confusion matrix showed Case 2 was already strong -- Revision
+3 was solving the wrong problem and was **reverted**. The actual bottleneck was Case 3
+(`ambiguous_scale`): only 17.6% recall (3 of 17). Revision 4 added three new Case 3 anchors: kappa
+improved to **0.7667** (4-case) / 0.7517 (3-way polarity), ambiguous_scale recall nearly tripled to
+47.1% -- still below target, with five further root causes found and fixed in Revision 5 (Case 2
+harm-scope gap, broadened pattern (a), new pattern (d), tightened pattern (c), a narrow reinstated
+"despite adversity" anchor). Revision 5's validation-only pilot brought kappa to **0.7731** and
+ambiguous_scale recall to 88.2% (15/17) -- but negative_event recall dropped hard, 94.1% -> 70.6%
+(9/34 now wrongly called `ambiguous_scale`), and 3-way polarity kappa actually *fell* (0.7517 ->
+0.7338), since misclassifying a real negative event as neutral directly undercounts
+`Negative_Specific_share`. Reading all 9 misses found two real prompt bugs -- pattern (d)
+over-triggered on emotional language wrapping a REAL described event (AIG 2012, "witnessed their
+company being rapidly dismantled"), and the despite-adversity pattern over-triggered on named
+hardship with no stated completed outcome (Travelers 2014) -- both fixed in Revision 6 with new
+Case 1 counter-anchors. The remaining 6 misses (MS&AD 2018/2019, Chubb 2023 x2, Chubb 2020 x2) were
+a **manual-coding correction, not a schema change**: broad societal/political commentary the CEO
+letter cites as context, not a specific event reported as having happened to the company --
+confirmed `corporate_relevance_pred == "Corporate"` for all 6 (not an upstream filtering issue). No
+prompt anchors were added pulling this pattern toward `negative_event`; GPT's original
+`ambiguous_scale` calls on these were already correct. A new Step 6.13.2a applies this manual-
+coding correction to `validation_sample_BLIND.csv` before the pilot re-run. The notebook's Section
+6.13 now uses task name `polarity_reclass_tier1plus_v6` and exports to
+`df_ar_ceo_sentences_polarity_reclass_v6.csv`, keeping Revisions 1, 2, 4, and 5's output on Drive
 untouched for the audit trail (Revision 3's output, if any was produced, should not be trusted or
 reused).
 
 **Validation-only pilot check (notebook Step 6.13.2b)** classifies just the 100-sentence
 manually-coded validation sample synchronously (mirroring the 6.10 pilot pattern, not the Batch
 API) and reports kappa immediately -- before committing to a full Batch API re-run over all 3,994
-sentences. Only proceed to the full re-run if that pilot clears kappa >= 0.80. Coverage
-numbers/firm-year CSV are NOT to be trusted until the full re-run's Cohen's kappa (6.13.10) also
-passes.
+sentences. Run **6.13.2a first** (the manual-coding correction) on every pilot re-run from here on.
+Only proceed to the full re-run if the pilot clears kappa >= 0.80. Coverage numbers/firm-year CSV
+are NOT to be trusted until the full re-run's Cohen's kappa (6.13.10) also passes.
 Re-running requires an authenticated OpenAI client in Colab (no API access in
 this sandbox) and genuine human manual annotation for validation (cannot be
-fabricated). Steps 1 (population count), the validation-sample selection, and two full
-validation-only pilot runs (Revisions 2 and 4) have been done for real; everything downstream of
-the Revision 5 classification is written but blocked on you running it.
+fabricated). Steps 1 (population count), the validation-sample selection, and three full
+validation-only pilot runs (Revisions 2, 4, and 5) have been done for real; everything downstream
+of the Revision 6 classification is written but blocked on you running it.
 
 ## Population
 
@@ -67,17 +69,16 @@ negative = 67.
 
 - `00_prompt_design.py` -- the locked `POLARITY_SYSTEM_PROMPT` and JSON
   schema. Four-case taxonomy (`negative_event` / `mitigated_negative` /
-  `ambiguous_scale` / `plain_positive`), Revision 5: Case 2 now requires the
-  reduced quantity to be a genuine risk/harm (not headcount/jobs/program
-  scope), plus a "despite adversity, delivered a good outcome" anchor
-  (Allianz 2020); Case 3 gains a fourth pattern (personal/emotional
-  reflection with no company action described) and broadens pattern (a) to
-  cover conditionals and generic statements of principle, with counter-
-  examples for the reduction-whitelist gap (Talanx 2016 job cuts, AIG 2015
-  headcount trim, Progressive 2021 narrowed program scope); Case 4 gains two
-  counter-examples distinguishing a performance metric that IS the
-  achievement from a bare neutral scale fact (MS&AD 2021 survey score,
-  Allstate 2020 equity review). Revision 4's four Case 3 anchors (Daiichi
+  `ambiguous_scale` / `plain_positive`), Revision 6: pattern (d)
+  [personal/emotional reflection] now requires that NO concrete event be
+  named -- emotional language wrapping a real described event (AIG 2012,
+  "company being rapidly dismantled") stays `negative_event`, not
+  `ambiguous_scale`. The Case 2 "despite adversity" pattern now requires
+  BOTH named adversity AND a stated completed positive outcome -- naming
+  hardship alone (Travelers 2014) is `negative_event`, not
+  `mitigated_negative`. All Revision 5 content (Case 2 harm-scope gap fix,
+  broadened pattern (a), pattern (c) tightening, Allianz 2020
+  despite-adversity anchor) and Revision 4's four Case 3 anchors (Daiichi
   2020, MS&AD 2022, Tokio Marine 2021, Ping An 2021) and the original
   Revision 1/2 anchors (Chubb 2018 GHG-reduction, Progressive 2022
   engagement-index, Travelers 2012 catastrophe-loss, Prudential 2018
@@ -97,7 +98,12 @@ negative = 67.
   the known failure mode concentrates in). Outputs:
   - `data/validation_sample_BLIND.csv` -- hand-code the `manual_case`
     column (`negative_event` / `mitigated_negative` / `ambiguous_scale`)
-    for all 100 rows, blind to both FinBERT's and GPT's labels.
+    for all 100 rows, blind to both FinBERT's and GPT's labels. **Correction
+    applied as of Revision 6** (notebook Step 6.13.2a): 6 rows (MS&AD
+    2018/2019, Chubb 2023 x2, Chubb 2020 x2) re-coded from `negative_event`
+    to `ambiguous_scale` -- broad societal/political commentary, not a
+    reported company event. Run 6.13.2a once against your Drive copy before
+    the next pilot re-run.
   - `data/validation_sample_finbert_key.csv` -- FinBERT's original label,
     kept separate so it doesn't bias hand-coding.
 - `03_rebuild_shares.py` -- **not runnable yet.** Refuses to run
