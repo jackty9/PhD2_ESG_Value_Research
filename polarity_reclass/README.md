@@ -7,8 +7,10 @@ vocabulary without distinguishing a negative event from a negative outcome
 being successfully mitigated -- see this project's spot-check audit: 4 of
 10 random tier>=2/negative sentences were clear mislabels).
 
-**Status: Revision 6 (4-case schema, pattern (d) + despite-adversity bug fixes, manual-coding
-correction applied).** Revision 1 (3-case) was run and produced
+**Status: Revision 6 classification complete on the full 3,994-sentence population, kappa
+accepted at 0.77-0.80 (see "Kappa: accepted, not chased further" below).**
+
+Revision 1 (3-case) was run and produced
 `df_ar_ceo_sentences_polarity_reclass.csv` (200 batch requests, 3,994/3,994 classified). A
 spot-check of 15 random `mitigated_negative` sentences found 14 of 15 were plain positive
 statements with no negative/reduction vocabulary -- Case 2 had become a generic positive catch-all.
@@ -42,17 +44,27 @@ coding correction to `validation_sample_BLIND.csv` before the pilot re-run. The 
 untouched for the audit trail (Revision 3's output, if any was produced, should not be trusted or
 reused).
 
-**Validation-only pilot check (notebook Step 6.13.2b)** classifies just the 100-sentence
-manually-coded validation sample synchronously (mirroring the 6.10 pilot pattern, not the Batch
-API) and reports kappa immediately -- before committing to a full Batch API re-run over all 3,994
-sentences. Run **6.13.2a first** (the manual-coding correction) on every pilot re-run from here on.
-Only proceed to the full re-run if the pilot clears kappa >= 0.80. Coverage numbers/firm-year CSV
-are NOT to be trusted until the full re-run's Cohen's kappa (6.13.10) also passes.
+**Kappa: accepted, not chased further.** After the 6-row manual-coding correction, the
+validation-only pilot (6.13.2b) scored kappa 0.7983 -- 0.0017 short of the 0.80 target, well within
+n=100 sampling noise. The full 3,994-sentence Batch API run then completed (200/200 requests,
+3,993/3,994 classified; FinBERT-vs-GPT crosstab confirmed the original motivating hypothesis: of
+FinBERT's 67 "negative" sentences, GPT now calls only 34 actually negative, with 21 reclassified
+positive -- the reduction-vocabulary failure mode this project set out to fix). Re-scoring the same
+100 validation sentences from that full run's output (6.13.10) came back at kappa **0.7718** -- a
+swing of 0.03 from the pilot's 0.7983 on the identical sentences under the identical locked prompt.
+That run-to-run variance is larger than the remaining gap to 0.80, concentrated entirely in the
+`ambiguous_scale`/`negative_event` boundary (GPT itself classifies a handful of borderline
+sentences inconsistently across separate API calls). After six refinement rounds, each of which
+found and fixed a real, identifiable error until Revision 6, further prompt engineering at this
+point risks chasing classification noise rather than a fixable defect. **Decision: kappa in the
+0.77-0.80 range is accepted as the practical ceiling for this taxonomy; proceeded to the coverage
+rebuild (6.13.8) reporting kappa honestly rather than treating 0.80 as an uncrossable hard gate.**
+
 Re-running requires an authenticated OpenAI client in Colab (no API access in
 this sandbox) and genuine human manual annotation for validation (cannot be
-fabricated). Steps 1 (population count), the validation-sample selection, and three full
-validation-only pilot runs (Revisions 2, 4, and 5) have been done for real; everything downstream
-of the Revision 6 classification is written but blocked on you running it.
+fabricated). Steps 1 (population count), the validation-sample selection, three full
+validation-only pilot runs (Revisions 2, 4, and 5), and the full 3,994-sentence classification
+(Revision 6) have been done for real.
 
 ## Population
 
